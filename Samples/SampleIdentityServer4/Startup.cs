@@ -39,15 +39,14 @@ namespace SampleIdentityServer4
 				{
 					options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
                     options.SignOutScheme = IdentityServerConstants.DefaultCookieAuthenticationScheme;
-					options.SPOptions.EntityId = new EntityId("https://localhost:44369/Saml2");
+					options.SPOptions.EntityId = new EntityId("https://localhost:44369/Saml2");		// HERE - this app
 					options.IdentityProviders.Add(
 						new IdentityProvider(
-							new EntityId("http://localhost:52071/Metadata"), options.SPOptions)
+							new EntityId("http://localhost:52071/Metadata"), options.SPOptions)	// NO IDEA
 						{
 							LoadMetadata = true
 						});
-
-					options.SPOptions.ServiceCertificates.Add(new X509Certificate2("Sustainsys.Saml2.Tests.pfx"));
+                    options.SPOptions.ServiceCertificates.Add(new X509Certificate2("Sustainsys.Saml2.Tests.pfx"));
 				})
 				.AddOpenIdConnect("demoidsrv", "IdentityServer", options =>
 				{

@@ -84,7 +84,7 @@ namespace Sustainsys.Saml2.Metadata.Extensions
                 if (x509SecurityKey == null)
                 {
                     throw new CryptographicException(
-                        "The encrypting credentials have an unknown key of type {encryptingCredentials.Key.GetType()}");
+                        $"The encrypting credentials have an unknown key of type {encryptingCredentials.Key.GetType()}");
                 }
 
                 symmetricAlgorithm.KeySize = keySize;

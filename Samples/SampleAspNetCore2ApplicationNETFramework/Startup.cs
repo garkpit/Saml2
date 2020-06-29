@@ -50,10 +50,10 @@ namespace SampleAspNetCore2ApplicationNETFramework
             services.AddAuthentication()
                 .AddSaml2(options => 
                 {
-                    options.SPOptions.EntityId = new EntityId("https://localhost:44342/Saml2");
+                    options.SPOptions.EntityId = new EntityId("https://localhost:44342/Saml2");     // HERE
                     options.IdentityProviders.Add(
                         new IdentityProvider(
-                            new EntityId("https://localhost:44300/Metadata"), options.SPOptions)
+                            new EntityId("https://localhost:44300/Metadata"), options.SPOptions)    // StubIdp
                         {
                             LoadMetadata = true
                         });
