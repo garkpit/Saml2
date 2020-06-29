@@ -40,12 +40,17 @@ namespace SampleIdentityServer4
 					options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
                     options.SignOutScheme = IdentityServerConstants.DefaultCookieAuthenticationScheme;
 					options.SPOptions.EntityId = new EntityId("https://localhost:44369/Saml2");		// HERE - this app
-					options.IdentityProviders.Add(
-						new IdentityProvider(
-							new EntityId("http://localhost:52071/Metadata"), options.SPOptions)	// NO IDEA
-						{
-							LoadMetadata = true
-						});
+                    options.IdentityProviders.Add(
+                        new IdentityProvider(
+                                // original: ... erm?!?! no idea what 52071 is supposed to be pointing to!
+                                //new EntityId("http://localhost:52071/Metadata"), options.SPOptions)
+                                // original was crashing with "System.Net.WebException: No connection could be made (etc)"
+                                // so I copied the line from the SampleAspNetCore2ApplicationNETFramework project:
+                                // and it seems to work :)
+                                new EntityId("https://localhost:44300/Metadata"), options.SPOptions) // StubIdp
+                            {
+                                LoadMetadata = true
+                            });
                     options.SPOptions.ServiceCertificates.Add(new X509Certificate2("Sustainsys.Saml2.Tests.pfx"));
 				})
 				.AddOpenIdConnect("demoidsrv", "IdentityServer", options =>
