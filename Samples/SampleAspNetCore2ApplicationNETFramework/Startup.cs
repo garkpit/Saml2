@@ -14,6 +14,8 @@ using SampleAspNetCore2ApplicationNETFramework.Services;
 using Sustainsys.Saml2;
 using Sustainsys.Saml2.Metadata;
 using System.Security.Cryptography.X509Certificates;
+using Sustainsys.Saml2.Configuration;
+using Sustainsys.Saml2.WebSso;
 
 namespace SampleAspNetCore2ApplicationNETFramework
 {
@@ -51,12 +53,21 @@ namespace SampleAspNetCore2ApplicationNETFramework
                 .AddSaml2(options => 
                 {
                     options.SPOptions.EntityId = new EntityId("https://localhost:44342/Saml2");     // HERE
+
+                    options.SPOptions.ReturnUrl = new Uri("/Jay/Hello", UriKind.Relative);
+
                     options.IdentityProviders.Add(
                         new IdentityProvider(
                             new EntityId("https://localhost:44300/Metadata"), options.SPOptions)    // StubIdp
                         {
-                            LoadMetadata = true
+                            LoadMetadata = true,
+                            AllowUnsolicitedAuthnResponse = true,
+                            //Binding = Saml2BindingType.HttpPost,
+                            //MetadataLocation = "~/App_Data/IdpMetadata.xml",
                         });
+
+                    //options.SPOptions.AuthenticateRequestSigningBehavior = SigningBehavior.IfIdpWantAuthnRequestsSigned;
+                    //options.SPOptions.DiscoveryServiceUrl = etc
 
                     options.SPOptions.ServiceCertificates.Add(new X509Certificate2("Sustainsys.Saml2.Tests.pfx"));
                 });
