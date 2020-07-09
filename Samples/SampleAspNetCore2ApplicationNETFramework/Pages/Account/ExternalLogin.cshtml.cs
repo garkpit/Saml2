@@ -83,6 +83,11 @@ namespace SampleAspNetCore2ApplicationNETFramework.Pages.Account
                 identity.AddClaim(logoutInfo);
                 identity.AddClaim(sessionIndex);
 
+                foreach (var role in _externalLoginInfo.Principal.FindAll("http://schemas.microsoft.com/ws/2008/06/identity/claims/role"))
+                {
+                    identity.AddClaim(role);
+                }
+
                 return principal;
             }
         }

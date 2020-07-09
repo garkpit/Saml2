@@ -18,11 +18,27 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.14" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" PrivateAssets="All" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.9.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Sustainsys.Saml2.AspNetCore2\Sustainsys.Saml2.AspNetCore2.csproj" />
     <ProjectReference Include="..\..\Sustainsys.Saml2\Sustainsys.Saml2.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App_Data\1f6df580-c7db-4bd8-9cf9-c354874e079c.Metadata.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Data\JaySelfCert1.pfx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
